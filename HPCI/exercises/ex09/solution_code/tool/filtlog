@@ -1,0 +1,5 @@
+#!/bin/bash
+
+o=$1
+paste <( cat $o | grep __NP -B1 | grep -v __ | sed '/^--$/d' )  \
+      <( cat $o | grep __TIME -B1 | grep -v __ | sed '/^--$/d' )

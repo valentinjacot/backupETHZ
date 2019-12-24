@@ -1,0 +1,4 @@
+power_manual
+power_cblas
+eigenv_lapack
+*.txt

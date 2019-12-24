@@ -1,0 +1,6 @@
+*.png
+*.eps
+*.txt
+1_cache_size/cache_size
+2_associativity/associativity
+3_alock/alock

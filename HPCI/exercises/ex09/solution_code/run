@@ -1,0 +1,28 @@
+#!/bin/bash
+
+set -eu
+
+: ${N=64}     # grid size in each dimension, NX=NY=N
+: ${NB=1}     # number of blocks in each dimension, NBX=NBY=NB
+: ${CASE=0}   # 0: diffusion, 1: life, 2: wave
+: ${OUTFMT=1} # 0: none, 
+              # 1: Write(), 2: WriteMpiGather(), 3: WriteMpiIo(), 4: WriteBin(), 
+              # 5: Plot(), 6: PlotBin()
+: ${NTFACTOR=1} # factor for number of timesteps, applies to RunDiffusion
+
+# number of ranks
+NP=$(($NB*$NB))
+
+echo $NP
+echo "__NP"
+
+make clean
+make EXTRA="-DN=$N -DNB=$NB -DCASE=$CASE -DOUTFMT=$OUTFMT -DNTFACTOR=$NTFACTOR"
+
+c="/usr/bin/time -f%e mpirun --report-bindings --oversubscribe -n $NP ./main"
+echo "$c"
+eval "$c"
+
+echo "__TIME"
+echo
+

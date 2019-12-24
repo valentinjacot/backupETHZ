@@ -1,0 +1,20 @@
+#!/bin/bash
+
+set -eu
+
+o=o
+
+: ${NTFACTOR=10000}
+: ${OUTFMT=0}
+: ${N0=64}
+
+export NTFACTOR
+export OUTFMT
+
+for NB in 1 2 3 4 5 6 ; do
+  N=$(($NB*N0))
+  c="NB=$NB N=$N ./run |& tee -a $o"
+  echo "$c"
+  eval "$c"
+  echo >> $o
+done
