@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
+		<accessrules>
+			<accessrule kind="accessible" pattern="javafx.application.Application"/>
+		</accessrules>
+	</classpathentry>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="C:/Users/valen/.gradle/caches/modules-2/files-2.1/org.openjfx/javafx-graphics/11.0.2/20459ea2cf714942bcbeb78a7f70ba3531dc1a44/javafx-graphics-11.0.2-win.jar" sourcepath="C:/Users/valen/.gradle/caches/modules-2/files-2.1/org.openjfx/javafx-graphics/11.0.2/15eadef01f327a851a6d3af0ac89d56292076b13/javafx-graphics-11.0.2-sources.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

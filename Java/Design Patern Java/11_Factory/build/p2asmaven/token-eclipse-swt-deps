@@ -1,0 +1,35 @@
+mirrorApp: ### ARGS ###
+--launcher.suppressErrors
+-nosplash
+-application org.eclipse.ant.core.antRunner
+
+### BUILD.XML ###
+<?xml version="1.0" encoding="UTF-8"?><project>
+    
+  <p2.mirror>
+        
+    <source>
+            
+      <repository location="https://download.eclipse.org/eclipse/updates/4.11/R-4.11-201903070500/"/>
+            
+      <repository kind="artifact" location="file:///C:\Users\valen\.goomph\shared-bundles"/>
+          
+    </source>
+        
+    <destination location="file:///C:\Users\valen\Documents\RW-2019\11_Factory\build\p2asmaven\p2\eclipse-swt-deps" append="false"/>
+        
+    <iu id="org.eclipse.swt"/>
+        
+    <iu id="org.eclipse.jface"/>
+        
+    <iu id="org.eclipse.core.commands"/>
+        
+    <iu id="org.eclipse.equinox.common"/>
+      
+  </p2.mirror>
+  
+</project>
+
+mavenGroup: eclipse-swt-deps
+goomph:1
+repo2runnable:false

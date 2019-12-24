@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.buildship.ui.wizard.project.import">
+		<item value="false" key="apply_working_sets"/>
+		<item value="C:\Users\valen\Documents\RW-2019\02_Java" key="project_location"/>
+		<list key="working_sets">
+		</list>
+	</section>
+</section>

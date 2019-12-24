@@ -1,0 +1,8 @@
+macrorecord dash penup forward 10 pendown forward 10
+macrosave
+macrorecord dashline forward 10 repeat 2 macrorun dash
+macrosave
+macrorecord starlineAndTurn macrorun dashline left 60 macrorun dashline
+right 120 macrorun dashline left 60 macrorun dashline right 120
+macrosave
+repeat 3 macrorun starlineAndTurn

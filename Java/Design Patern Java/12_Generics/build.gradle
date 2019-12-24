@@ -1,0 +1,32 @@
+plugins {
+    id 'java'
+}
+
+repositories {
+    jcenter()
+}
+
+sourceCompatibility = 11
+targetCompatibility = 11
+compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = 'UTF-8'
+
+
+dependencies {
+}
+
+
+task gradleWrapper(type: Wrapper)
+task zip(type: Zip) {
+	dependsOn gradleWrapper
+    from projectDir
+    
+    include 'build.gradle'
+	include 'gradle/**'
+	include 'gradlew'
+	include 'gradlew.bat'
+	
+	include 'src/main/java/generics/*.java'
+	include 'src/main/java/patterns/builder/*.java'
+}
+

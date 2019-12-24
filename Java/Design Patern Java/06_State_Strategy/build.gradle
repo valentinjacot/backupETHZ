@@ -1,0 +1,53 @@
+plugins {
+	id 'java'
+}
+
+repositories {
+	jcenter()
+}
+
+sourceCompatibility = 11
+targetCompatibility = 11
+compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = 'UTF-8'
+
+def currentOS = org.gradle.internal.os.OperatingSystem.current()
+def platform
+if (currentOS.isWindows()) {
+	platform = 'win'
+} else if (currentOS.isLinux()) {
+	platform = 'linux'
+} else if (currentOS.isMacOsX()) {
+	platform = 'mac'
+}
+
+dependencies {
+	compile "org.openjfx:javafx-base:11:${platform}"
+	compile "org.openjfx:javafx-graphics:11:${platform}"
+	compile "org.openjfx:javafx-controls:11:${platform}"
+	compile "org.openjfx:javafx-swing:11:${platform}"
+}
+
+
+
+task gradleWrapper(type: Wrapper)
+task zip(type: Zip) {
+	dependsOn gradleWrapper
+	from projectDir
+
+	include 'build.gradle'
+	include 'gradle/**'
+	include 'gradlew'
+	include 'gradlew.bat'
+
+	include 'src/main/java/patterns/state/parser/**'
+	include 'src/main/java/patterns/state/tickets/**'
+	include 'src/main/java/patterns/strategy/nim/**'
+	include 'src/main/java/patterns/strategy/layout/NullLayout.java'
+	include 'src/main/java/patterns/strategy/layout/TestLayout.java'
+	include 'src/main/java/patterns/strategy/layout/RandomLayout.java'
+	include 'src/main/java/patterns/strategy/layout/DiagonalLayout.java'
+	include 'src/main/java/patterns/strategy/layout/ListLayout.java'
+	include 'src/main/java/patterns/strategy/stateful/LayoutComparer.java'
+	include 'src/main/resources/**'
+}

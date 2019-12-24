@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><metadata>
+    
+  <groupId>eclipse-swt-deps</groupId>
+    
+  <artifactId>org.eclipse.osgi.util</artifactId>
+    
+  <version>3.5.200.v20190115-2323</version>
+    
+  <versioning>
+        
+    <versions>
+            
+      <version>3.5.200.v20190115-2323</version>
+          
+    </versions>
+        
+    <lastUpdated>1566285581168</lastUpdated>
+      
+  </versioning>
+  
+</metadata>

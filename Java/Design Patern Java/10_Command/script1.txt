@@ -1,0 +1,10 @@
+forward 60
+penup
+forward 10
+left 90
+forward 20
+pendown
+right 120
+forward 40
+right 120
+forward 40

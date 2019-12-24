@@ -1,0 +1,36 @@
+apply plugin: 'java'
+
+repositories {
+	jcenter()
+}
+
+sourceCompatibility = 11
+targetCompatibility = 11
+compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = 'UTF-8'
+
+
+dependencies {
+	compile 'uk.com.robust-it:cloning:1.9.10'
+	compile "junit:junit:4.12"
+}
+
+
+task gradleWrapper(type: Wrapper)
+task zip(type: Zip) {
+	dependsOn gradleWrapper
+	from projectDir
+
+	include 'build.gradle'
+	include 'gradle/**'
+	include 'gradlew'
+	include 'gradlew.bat'
+
+	include 'src/main/java/patterns/clone/*.java'
+	include 'src/main/java/patterns/clone/company/**'
+	include 'src/main/java/patterns/clone/comparison/**'
+	include 'src/main/java/patterns/clone/immutable/*.java'
+	include 'src/main/java/patterns/clone/immutable/samples/*.java'
+	include 'src/main/java/patterns/clone/alias/*.java'
+	include 'src/main/java/patterns/clone/stack/*.java'
+}

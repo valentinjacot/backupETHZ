@@ -1,0 +1,35 @@
+plugins {
+	id 'java'
+}
+
+repositories {
+	jcenter()
+}
+
+sourceCompatibility = 11
+targetCompatibility = 11
+compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = 'UTF-8'
+
+
+dependencies {
+	testCompile 'junit:junit:4.12'
+}
+
+
+task gradleWrapper(type: Wrapper)
+task zip(type: Zip) {
+	dependsOn gradleWrapper
+	from projectDir
+
+	include 'build.gradle'
+	include 'gradle/**'
+	include 'gradlew'
+	include 'gradlew.bat'
+
+	include '*.launch'
+
+	include 'src/main/java/inheritance/Stack*.java'
+	include 'src/main/java/patterns/inheritance/*.java'
+	include 'src/test/java/patterns/inheritance/*.java'
+}

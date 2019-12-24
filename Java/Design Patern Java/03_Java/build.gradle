@@ -1,0 +1,43 @@
+plugins {
+    id 'java'
+    id 'eclipse'
+    id 'idea'
+    id 'org.openjfx.javafxplugin' version '0.0.7'
+}
+
+sourceCompatibility = 11
+targetCompatibility = 11
+compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = 'UTF-8'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+   compile 'junit:junit:4.12'
+}
+
+javafx {
+    modules = [ 'javafx.controls', 'javafx.fxml', 'javafx.graphics', 'javafx.base' ]
+}
+
+// eclipse plugin patch
+eclipse.classpath.file {
+	whenMerged {
+		entries.findAll { it.kind == 'lib' }.each { it.entryAttributes['module'] = 'true' }
+    }
+}
+
+
+//task wrapper(type: Wrapper)
+task zip(type: Zip) {
+    from projectDir
+    
+    include 'build.gradle'
+	include 'gradle/**'
+	include 'gradlew'
+	include 'gradlew.bat'
+	
+	include 'src/main/java/**'
+}

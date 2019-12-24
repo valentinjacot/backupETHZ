@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>Assignement2</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+	</natures>
+	<variableList>
+		<variable>
+			<name>Java11</name>
+			<value>file:/C:/Program%20Files%20(x86)/Common%20Files/Java/jdk-11.0.2/bin</value>
+		</variable>
+	</variableList>
+</projectDescription>
