@@ -1,0 +1,17 @@
+Problem 2:
+----------
+./heat2d -p 2 --verify
+
+// Multigrid setting optimization
+Using 1 Multigrid Level, 1 down, 1 up: 140.800s
+Using 5 Multigrid Levels, 3 down, 3 up: 33.027s
+
+// Cache optimizations
+Inverted row-wise to column-wise 14.948s
+Allocating contiguous rows 14.165s
+Swapping pointers: 11.822s
+Cache Blocking: No Improvement
+
+// Vectorization
+Unaligned: 9.528s
+Aligned:  
