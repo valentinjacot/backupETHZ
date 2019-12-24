@@ -1,2 +1,2 @@
 # backupETHZ
-Backup of some important files from my studies at the ETHZ
+Backup of some interesting files and small programs from my studies at the ETHZ
