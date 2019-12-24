@@ -1,0 +1,11 @@
+<xml...>
+<cell>
+<title weight='bold'> Big Data – Exercises & Solutions </title>
+<date> Spring 2019 – Week 4 – ETH Zurich </date>
+<subtitle>Introduction </subtitle>
+<subtext><p>This exercise will cover XML and JSON well-formedness. </p></subtext>
+<text><p>We recommend you use an online editor to validate and check your solutions for well-formedness, such as <link style="underline">this</link> for XML and this for JSON. To edit XML files, something like this might work better, which offers syntax highlighting and formatting.
+If you prefer, you can instead install oXygen, an XML/JSON development IDE. You should have received a license key for it by email.</p></text>
+
+
+</body>
