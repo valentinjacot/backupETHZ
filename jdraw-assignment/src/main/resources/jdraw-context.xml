@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+
+<beans>
+	<bean id="drawModel" class="jdraw.std.StdDrawModel"/>
+
+	<bean id="drawView" class="jdraw.std.StdDrawView" scope="prototype">
+		<constructor-arg><ref bean="drawModel"/></constructor-arg>
+	</bean>
+
+	<bean id="drawContext" class="jdraw.std.StdContext" scope="prototype"
+		init-method="initGUI"
+	>
+		<constructor-arg ref="drawView"/>
+
+		<property name="width"><value>600</value></property>
+		<property name="height"><value>400</value></property>
+
+		<constructor-arg>
+			<list>	<!-- null represents a separator -->
+				<ref bean="line"/>
+				<ref bean="rectangle"/>
+				<ref bean="oval"/>
+				<null/>
+				<ref bean="circle"/>
+				<ref bean="greencircle"/>
+				<null/>
+				<ref bean="ernst-swiss"/>
+				<ref bean="polygon"/>
+			</list>
+		</constructor-arg>
+	</bean>
+
+
+	<bean id="rectangle" class="jdraw.toolfactory.RectToolFactory"> <!-- I renamed RectangleToolFactory into RectToolFactory "angle" -->
+		<property name="name"><value>Rectangle</value></property>
+		<property name="iconName"><value>rectangle.png</value></property>
+	</bean>
+	
+	<bean id="line" class="jdraw.toolfactory.LineToolFactory">
+		<property name="name"><value>Line</value></property>
+		<property name="iconName"><value>line.png</value></property>
+	</bean>
+
+	<bean id="oval" class="jdraw.toolfactory.OvalToolFactory">
+		<property name="name"><value>Oval</value></property>
+		<property name="iconName"><value>oval.png</value></property>
+	</bean>
+
+	<bean id="circle" class="jdraw.toolfactory.CircleToolFactory">
+		<property name="name"><value>Circle</value></property>
+		<property name="iconName"><value>circle.png</value></property>
+	</bean>
+
+	<bean id="greencircle" class="jdraw.toolfactory.GreenCircleToolFactory">
+		<property name="name"><value>GreenCircle</value></property>
+		<property name="iconName"><value>CircleGreen.png</value></property>
+	</bean>
+
+	<bean id="ernst-swiss" class="jdraw.figures.ernst.SwissCrossToolFactory">
+		<property name="name"><value>Swisscross</value></property>
+		<property name="iconName"><value>swisscross.png</value></property>
+	</bean>
+
+	<bean id="polygon" class="jdraw.figures.ernst.TetraederToolFactory">
+		<property name="name"><value>Polygon</value></property>
+		<property name="iconName"><value>tetraeder.png</value></property>
+	</bean>
+
+
+</beans>

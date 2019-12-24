@@ -1,0 +1,344 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<title>Source code</title>
+<link rel="stylesheet" type="text/css" href="../../../stylesheet.css" title="Style">
+</head>
+<body>
+<main role="main">
+<div class="sourceContainer">
+<pre><span class="sourceLineNo">001</span><a id="line.1">/*</a>
+<span class="sourceLineNo">002</span><a id="line.2"> * Copyright (c) 2018 Fachhochschule Nordwestschweiz (FHNW)</a>
+<span class="sourceLineNo">003</span><a id="line.3"> * All Rights Reserved.</a>
+<span class="sourceLineNo">004</span><a id="line.4"> */</a>
+<span class="sourceLineNo">005</span><a id="line.5">package jdraw.std;</a>
+<span class="sourceLineNo">006</span><a id="line.6"></a>
+<span class="sourceLineNo">007</span><a id="line.7">import java.io.File;</a>
+<span class="sourceLineNo">008</span><a id="line.8">import java.util.LinkedList;</a>
+<span class="sourceLineNo">009</span><a id="line.9">import java.util.List;</a>
+<span class="sourceLineNo">010</span><a id="line.10"></a>
+<span class="sourceLineNo">011</span><a id="line.11">import javax.swing.JFileChooser;</a>
+<span class="sourceLineNo">012</span><a id="line.12">import javax.swing.JMenu;</a>
+<span class="sourceLineNo">013</span><a id="line.13">import javax.swing.JMenuItem;</a>
+<span class="sourceLineNo">014</span><a id="line.14">import javax.swing.KeyStroke;</a>
+<span class="sourceLineNo">015</span><a id="line.15">import javax.swing.filechooser.FileFilter;</a>
+<span class="sourceLineNo">016</span><a id="line.16">import javax.swing.filechooser.FileNameExtensionFilter;</a>
+<span class="sourceLineNo">017</span><a id="line.17"></a>
+<span class="sourceLineNo">018</span><a id="line.18">import jdraw.figures.RectTool;</a>
+<span class="sourceLineNo">019</span><a id="line.19">import jdraw.framework.DrawCommandHandler;</a>
+<span class="sourceLineNo">020</span><a id="line.20">import jdraw.framework.DrawModel;</a>
+<span class="sourceLineNo">021</span><a id="line.21">import jdraw.framework.DrawTool;</a>
+<span class="sourceLineNo">022</span><a id="line.22">import jdraw.framework.DrawToolFactory;</a>
+<span class="sourceLineNo">023</span><a id="line.23">import jdraw.framework.DrawView;</a>
+<span class="sourceLineNo">024</span><a id="line.24">import jdraw.framework.Figure;</a>
+<span class="sourceLineNo">025</span><a id="line.25"></a>
+<span class="sourceLineNo">026</span><a id="line.26">/**</a>
+<span class="sourceLineNo">027</span><a id="line.27"> * Standard implementation of interface DrawContext.</a>
+<span class="sourceLineNo">028</span><a id="line.28"> * </a>
+<span class="sourceLineNo">029</span><a id="line.29"> * @see DrawView</a>
+<span class="sourceLineNo">030</span><a id="line.30"> * @author Dominik Gruntz &amp;amp; Christoph Denzler</a>
+<span class="sourceLineNo">031</span><a id="line.31"> * @version 2.6, 24.09.09</a>
+<span class="sourceLineNo">032</span><a id="line.32"> */</a>
+<span class="sourceLineNo">033</span><a id="line.33">@SuppressWarnings("serial")</a>
+<span class="sourceLineNo">034</span><a id="line.34">public class StdContext extends AbstractContext {</a>
+<span class="sourceLineNo">035</span><a id="line.35">        /**</a>
+<span class="sourceLineNo">036</span><a id="line.36">         * Constructs a standard context with a default set of drawing tools.</a>
+<span class="sourceLineNo">037</span><a id="line.37">         * @param view the view that is displaying the actual drawing.</a>
+<span class="sourceLineNo">038</span><a id="line.38">         */</a>
+<span class="sourceLineNo">039</span><a id="line.39">        public StdContext(DrawView view) {</a>
+<span class="sourceLineNo">040</span><a id="line.40">                super(view, null);</a>
+<span class="sourceLineNo">041</span><a id="line.41">        }</a>
+<span class="sourceLineNo">042</span><a id="line.42"></a>
+<span class="sourceLineNo">043</span><a id="line.43">        /**</a>
+<span class="sourceLineNo">044</span><a id="line.44">         * Constructs a standard context. The drawing tools available can be</a>
+<span class="sourceLineNo">045</span><a id="line.45">         * parameterized using &lt;code&gt;toolFactories&lt;/code&gt;.</a>
+<span class="sourceLineNo">046</span><a id="line.46">         * </a>
+<span class="sourceLineNo">047</span><a id="line.47">         * @param view  the view that is displaying the actual drawing.</a>
+<span class="sourceLineNo">048</span><a id="line.48">         * @param toolFactories  a list of DrawToolFactories that are available to the user</a>
+<span class="sourceLineNo">049</span><a id="line.49">         */</a>
+<span class="sourceLineNo">050</span><a id="line.50">        public StdContext(DrawView view, List&lt;DrawToolFactory&gt; toolFactories) {</a>
+<span class="sourceLineNo">051</span><a id="line.51">                super(view, toolFactories);</a>
+<span class="sourceLineNo">052</span><a id="line.52">        }</a>
+<span class="sourceLineNo">053</span><a id="line.53"></a>
+<span class="sourceLineNo">054</span><a id="line.54">        /**</a>
+<span class="sourceLineNo">055</span><a id="line.55">         * Creates and initializes the "Edit" menu.</a>
+<span class="sourceLineNo">056</span><a id="line.56">         * </a>
+<span class="sourceLineNo">057</span><a id="line.57">         * @return the new "Edit" menu.</a>
+<span class="sourceLineNo">058</span><a id="line.58">         */</a>
+<span class="sourceLineNo">059</span><a id="line.59">        @Override</a>
+<span class="sourceLineNo">060</span><a id="line.60">        protected JMenu createEditMenu() {</a>
+<span class="sourceLineNo">061</span><a id="line.61">                JMenu editMenu = new JMenu("Edit");</a>
+<span class="sourceLineNo">062</span><a id="line.62">                final JMenuItem undo = new JMenuItem("Undo");</a>
+<span class="sourceLineNo">063</span><a id="line.63">                undo.setAccelerator(KeyStroke.getKeyStroke("control Z"));</a>
+<span class="sourceLineNo">064</span><a id="line.64">                editMenu.add(undo);</a>
+<span class="sourceLineNo">065</span><a id="line.65">                undo.addActionListener(e -&gt; {</a>
+<span class="sourceLineNo">066</span><a id="line.66">                                final DrawCommandHandler h = getModel().getDrawCommandHandler();</a>
+<span class="sourceLineNo">067</span><a id="line.67">                                if (h.undoPossible()) {</a>
+<span class="sourceLineNo">068</span><a id="line.68">                                        h.undo();</a>
+<span class="sourceLineNo">069</span><a id="line.69">                                }</a>
+<span class="sourceLineNo">070</span><a id="line.70">                        }</a>
+<span class="sourceLineNo">071</span><a id="line.71">                );</a>
+<span class="sourceLineNo">072</span><a id="line.72"></a>
+<span class="sourceLineNo">073</span><a id="line.73">                final JMenuItem redo = new JMenuItem("Redo");</a>
+<span class="sourceLineNo">074</span><a id="line.74">                redo.setAccelerator(KeyStroke.getKeyStroke("control Y"));</a>
+<span class="sourceLineNo">075</span><a id="line.75">                editMenu.add(redo);</a>
+<span class="sourceLineNo">076</span><a id="line.76">                redo.addActionListener(e -&gt; {</a>
+<span class="sourceLineNo">077</span><a id="line.77">                                final DrawCommandHandler h = getModel().getDrawCommandHandler();</a>
+<span class="sourceLineNo">078</span><a id="line.78">                                if (h.redoPossible()) {</a>
+<span class="sourceLineNo">079</span><a id="line.79">                                        h.redo();</a>
+<span class="sourceLineNo">080</span><a id="line.80">                                }</a>
+<span class="sourceLineNo">081</span><a id="line.81">                        }</a>
+<span class="sourceLineNo">082</span><a id="line.82">                );</a>
+<span class="sourceLineNo">083</span><a id="line.83">                editMenu.addSeparator();</a>
+<span class="sourceLineNo">084</span><a id="line.84"></a>
+<span class="sourceLineNo">085</span><a id="line.85">                JMenuItem sa = new JMenuItem("SelectAll");</a>
+<span class="sourceLineNo">086</span><a id="line.86">                sa.setAccelerator(KeyStroke.getKeyStroke("control A"));</a>
+<span class="sourceLineNo">087</span><a id="line.87">                editMenu.add(sa);</a>
+<span class="sourceLineNo">088</span><a id="line.88">                sa.addActionListener( e -&gt; {</a>
+<span class="sourceLineNo">089</span><a id="line.89">                                for (Figure f : getModel().getFigures()) {</a>
+<span class="sourceLineNo">090</span><a id="line.90">                                        getView().addToSelection(f);</a>
+<span class="sourceLineNo">091</span><a id="line.91">                                }</a>
+<span class="sourceLineNo">092</span><a id="line.92">                                getView().repaint();</a>
+<span class="sourceLineNo">093</span><a id="line.93">                        }</a>
+<span class="sourceLineNo">094</span><a id="line.94">                );</a>
+<span class="sourceLineNo">095</span><a id="line.95"></a>
+<span class="sourceLineNo">096</span><a id="line.96">                editMenu.addSeparator();</a>
+<span class="sourceLineNo">097</span><a id="line.97">                editMenu.add("Cut").setEnabled(false);</a>
+<span class="sourceLineNo">098</span><a id="line.98">                editMenu.add("Copy").setEnabled(false);</a>
+<span class="sourceLineNo">099</span><a id="line.99">                editMenu.add("Paste").setEnabled(false);</a>
+<span class="sourceLineNo">100</span><a id="line.100"></a>
+<span class="sourceLineNo">101</span><a id="line.101">                editMenu.addSeparator();</a>
+<span class="sourceLineNo">102</span><a id="line.102">                JMenuItem clear = new JMenuItem("Clear");</a>
+<span class="sourceLineNo">103</span><a id="line.103">                editMenu.add(clear);</a>
+<span class="sourceLineNo">104</span><a id="line.104">                clear.addActionListener(e -&gt; {</a>
+<span class="sourceLineNo">105</span><a id="line.105">                        getModel().removeAllFigures();</a>
+<span class="sourceLineNo">106</span><a id="line.106">                });</a>
+<span class="sourceLineNo">107</span><a id="line.107">                </a>
+<span class="sourceLineNo">108</span><a id="line.108">                editMenu.addSeparator();</a>
+<span class="sourceLineNo">109</span><a id="line.109">                JMenuItem group = new JMenuItem("Group");</a>
+<span class="sourceLineNo">110</span><a id="line.110">                group.setEnabled(false);</a>
+<span class="sourceLineNo">111</span><a id="line.111">                editMenu.add(group);</a>
+<span class="sourceLineNo">112</span><a id="line.112"></a>
+<span class="sourceLineNo">113</span><a id="line.113">                JMenuItem ungroup = new JMenuItem("Ungroup");</a>
+<span class="sourceLineNo">114</span><a id="line.114">                ungroup.setEnabled(false);</a>
+<span class="sourceLineNo">115</span><a id="line.115">                editMenu.add(ungroup);</a>
+<span class="sourceLineNo">116</span><a id="line.116"></a>
+<span class="sourceLineNo">117</span><a id="line.117">                editMenu.addSeparator();</a>
+<span class="sourceLineNo">118</span><a id="line.118"></a>
+<span class="sourceLineNo">119</span><a id="line.119">                JMenu orderMenu = new JMenu("Order...");</a>
+<span class="sourceLineNo">120</span><a id="line.120">                JMenuItem frontItem = new JMenuItem("Bring To Front");</a>
+<span class="sourceLineNo">121</span><a id="line.121">                frontItem.addActionListener(e -&gt; {</a>
+<span class="sourceLineNo">122</span><a id="line.122">                        bringToFront(getView().getModel(), getView().getSelection());</a>
+<span class="sourceLineNo">123</span><a id="line.123">                });</a>
+<span class="sourceLineNo">124</span><a id="line.124">                orderMenu.add(frontItem);</a>
+<span class="sourceLineNo">125</span><a id="line.125">                JMenuItem backItem = new JMenuItem("Send To Back");</a>
+<span class="sourceLineNo">126</span><a id="line.126">                backItem.addActionListener(e -&gt; {</a>
+<span class="sourceLineNo">127</span><a id="line.127">                        sendToBack(getView().getModel(), getView().getSelection());</a>
+<span class="sourceLineNo">128</span><a id="line.128">                });</a>
+<span class="sourceLineNo">129</span><a id="line.129">                orderMenu.add(backItem);</a>
+<span class="sourceLineNo">130</span><a id="line.130">                editMenu.add(orderMenu);</a>
+<span class="sourceLineNo">131</span><a id="line.131"></a>
+<span class="sourceLineNo">132</span><a id="line.132">                JMenu grid = new JMenu("Grid...");</a>
+<span class="sourceLineNo">133</span><a id="line.133">                grid.add("Grid 1");</a>
+<span class="sourceLineNo">134</span><a id="line.134">                grid.add("Grid 2");</a>
+<span class="sourceLineNo">135</span><a id="line.135">                grid.add("Grid 3");</a>
+<span class="sourceLineNo">136</span><a id="line.136">                editMenu.add(grid);</a>
+<span class="sourceLineNo">137</span><a id="line.137">                </a>
+<span class="sourceLineNo">138</span><a id="line.138">                return editMenu;</a>
+<span class="sourceLineNo">139</span><a id="line.139">        }</a>
+<span class="sourceLineNo">140</span><a id="line.140"></a>
+<span class="sourceLineNo">141</span><a id="line.141">        /**</a>
+<span class="sourceLineNo">142</span><a id="line.142">         * Creates and initializes items in the file menu.</a>
+<span class="sourceLineNo">143</span><a id="line.143">         * </a>
+<span class="sourceLineNo">144</span><a id="line.144">         * @return the new "File" menu.</a>
+<span class="sourceLineNo">145</span><a id="line.145">         */</a>
+<span class="sourceLineNo">146</span><a id="line.146">        @Override</a>
+<span class="sourceLineNo">147</span><a id="line.147">        protected JMenu createFileMenu() {</a>
+<span class="sourceLineNo">148</span><a id="line.148">                JMenu fileMenu = new JMenu("File");</a>
+<span class="sourceLineNo">149</span><a id="line.149">                JMenuItem open = new JMenuItem("Open");</a>
+<span class="sourceLineNo">150</span><a id="line.150">                fileMenu.add(open);</a>
+<span class="sourceLineNo">151</span><a id="line.151">                open.setAccelerator(KeyStroke.getKeyStroke("control O"));</a>
+<span class="sourceLineNo">152</span><a id="line.152">                open.addActionListener(e -&gt; doOpen());</a>
+<span class="sourceLineNo">153</span><a id="line.153"></a>
+<span class="sourceLineNo">154</span><a id="line.154">                JMenuItem save = new JMenuItem("Save");</a>
+<span class="sourceLineNo">155</span><a id="line.155">                save.setAccelerator(KeyStroke.getKeyStroke("control S"));</a>
+<span class="sourceLineNo">156</span><a id="line.156">                fileMenu.add(save);</a>
+<span class="sourceLineNo">157</span><a id="line.157">                save.addActionListener(e -&gt;     doSave());</a>
+<span class="sourceLineNo">158</span><a id="line.158"></a>
+<span class="sourceLineNo">159</span><a id="line.159">                JMenuItem exit = new JMenuItem("Exit");</a>
+<span class="sourceLineNo">160</span><a id="line.160">                fileMenu.add(exit);</a>
+<span class="sourceLineNo">161</span><a id="line.161">                exit.addActionListener(e -&gt; System.exit(0));</a>
+<span class="sourceLineNo">162</span><a id="line.162">                </a>
+<span class="sourceLineNo">163</span><a id="line.163">                return fileMenu;</a>
+<span class="sourceLineNo">164</span><a id="line.164">        }</a>
+<span class="sourceLineNo">165</span><a id="line.165"></a>
+<span class="sourceLineNo">166</span><a id="line.166">        @Override</a>
+<span class="sourceLineNo">167</span><a id="line.167">        protected void doRegisterDrawTools() {</a>
+<span class="sourceLineNo">168</span><a id="line.168">                // TODO Add new figure tools here</a>
+<span class="sourceLineNo">169</span><a id="line.169">                DrawTool rectangleTool = new RectTool(this);</a>
+<span class="sourceLineNo">170</span><a id="line.170">                addTool(rectangleTool);</a>
+<span class="sourceLineNo">171</span><a id="line.171">        }</a>
+<span class="sourceLineNo">172</span><a id="line.172"></a>
+<span class="sourceLineNo">173</span><a id="line.173">        /**</a>
+<span class="sourceLineNo">174</span><a id="line.174">         * Changes the order of figures and moves the figures in the selection</a>
+<span class="sourceLineNo">175</span><a id="line.175">         * to the front, i.e. moves them to the end of the list of figures.</a>
+<span class="sourceLineNo">176</span><a id="line.176">         * @param model model in which the order has to be changed</a>
+<span class="sourceLineNo">177</span><a id="line.177">         * @param selection selection which is moved to front</a>
+<span class="sourceLineNo">178</span><a id="line.178">         */</a>
+<span class="sourceLineNo">179</span><a id="line.179">        public void bringToFront(DrawModel model, List&lt;Figure&gt; selection) {</a>
+<span class="sourceLineNo">180</span><a id="line.180">                // the figures in the selection are ordered according to the order in</a>
+<span class="sourceLineNo">181</span><a id="line.181">                // the model</a>
+<span class="sourceLineNo">182</span><a id="line.182">                List&lt;Figure&gt; orderedSelection = new LinkedList&lt;Figure&gt;();</a>
+<span class="sourceLineNo">183</span><a id="line.183">                int pos = 0;</a>
+<span class="sourceLineNo">184</span><a id="line.184">                for (Figure f : model.getFigures()) {</a>
+<span class="sourceLineNo">185</span><a id="line.185">                        pos++;</a>
+<span class="sourceLineNo">186</span><a id="line.186">                        if (selection.contains(f)) {</a>
+<span class="sourceLineNo">187</span><a id="line.187">                                orderedSelection.add(0, f);</a>
+<span class="sourceLineNo">188</span><a id="line.188">                        }</a>
+<span class="sourceLineNo">189</span><a id="line.189">                }</a>
+<span class="sourceLineNo">190</span><a id="line.190">                for (Figure f : orderedSelection) {</a>
+<span class="sourceLineNo">191</span><a id="line.191">                        model.setFigureIndex(f, --pos);</a>
+<span class="sourceLineNo">192</span><a id="line.192">                }</a>
+<span class="sourceLineNo">193</span><a id="line.193">        }</a>
+<span class="sourceLineNo">194</span><a id="line.194"></a>
+<span class="sourceLineNo">195</span><a id="line.195">        /**</a>
+<span class="sourceLineNo">196</span><a id="line.196">         * Changes the order of figures and moves the figures in the selection</a>
+<span class="sourceLineNo">197</span><a id="line.197">         * to the back, i.e. moves them to the front of the list of figures.</a>
+<span class="sourceLineNo">198</span><a id="line.198">         * @param model model in which the order has to be changed</a>
+<span class="sourceLineNo">199</span><a id="line.199">         * @param selection selection which is moved to the back</a>
+<span class="sourceLineNo">200</span><a id="line.200">         */</a>
+<span class="sourceLineNo">201</span><a id="line.201">        public void sendToBack(DrawModel model, List&lt;Figure&gt; selection) {</a>
+<span class="sourceLineNo">202</span><a id="line.202">                // the figures in the selection are ordered according to the order in</a>
+<span class="sourceLineNo">203</span><a id="line.203">                // the model</a>
+<span class="sourceLineNo">204</span><a id="line.204">                List&lt;Figure&gt; orderedSelection = new LinkedList&lt;Figure&gt;();</a>
+<span class="sourceLineNo">205</span><a id="line.205">                for (Figure f : model.getFigures()) {</a>
+<span class="sourceLineNo">206</span><a id="line.206">                        if (selection.contains(f)) {</a>
+<span class="sourceLineNo">207</span><a id="line.207">                                orderedSelection.add(f);</a>
+<span class="sourceLineNo">208</span><a id="line.208">                        }</a>
+<span class="sourceLineNo">209</span><a id="line.209">                }</a>
+<span class="sourceLineNo">210</span><a id="line.210">                int pos = 0;</a>
+<span class="sourceLineNo">211</span><a id="line.211">                for (Figure f : orderedSelection) {</a>
+<span class="sourceLineNo">212</span><a id="line.212">                        model.setFigureIndex(f, pos++);</a>
+<span class="sourceLineNo">213</span><a id="line.213">                }</a>
+<span class="sourceLineNo">214</span><a id="line.214">        }</a>
+<span class="sourceLineNo">215</span><a id="line.215"></a>
+<span class="sourceLineNo">216</span><a id="line.216">        /**</a>
+<span class="sourceLineNo">217</span><a id="line.217">         * Handles the saving of a drawing to a file.</a>
+<span class="sourceLineNo">218</span><a id="line.218">         */</a>
+<span class="sourceLineNo">219</span><a id="line.219">        private void doSave() {</a>
+<span class="sourceLineNo">220</span><a id="line.220">                JFileChooser chooser = new JFileChooser(getClass().getResource("").getFile());</a>
+<span class="sourceLineNo">221</span><a id="line.221">                chooser.setDialogTitle("Save Graphic");</a>
+<span class="sourceLineNo">222</span><a id="line.222">                chooser.setDialogType(JFileChooser.SAVE_DIALOG);</a>
+<span class="sourceLineNo">223</span><a id="line.223">                </a>
+<span class="sourceLineNo">224</span><a id="line.224">                chooser.setFileFilter(new FileNameExtensionFilter("JDraw Graphics (*.draw)", "draw"));</a>
+<span class="sourceLineNo">225</span><a id="line.225">                chooser.addChoosableFileFilter(new FileNameExtensionFilter("JDraw Graphics (*.xml)", "xml"));</a>
+<span class="sourceLineNo">226</span><a id="line.226">                chooser.addChoosableFileFilter(new FileNameExtensionFilter("JDraw Graphics (*.json)", "json"));</a>
+<span class="sourceLineNo">227</span><a id="line.227">                </a>
+<span class="sourceLineNo">228</span><a id="line.228">                int res = chooser.showSaveDialog(this);</a>
+<span class="sourceLineNo">229</span><a id="line.229"></a>
+<span class="sourceLineNo">230</span><a id="line.230">                if (res == JFileChooser.APPROVE_OPTION) {</a>
+<span class="sourceLineNo">231</span><a id="line.231">                        // save graphic</a>
+<span class="sourceLineNo">232</span><a id="line.232">                        File file = chooser.getSelectedFile();</a>
+<span class="sourceLineNo">233</span><a id="line.233">                        FileFilter filter = chooser.getFileFilter();</a>
+<span class="sourceLineNo">234</span><a id="line.234">                        if(filter instanceof FileNameExtensionFilter &amp;&amp; !filter.accept(file)) {</a>
+<span class="sourceLineNo">235</span><a id="line.235">                                file = new File(chooser.getCurrentDirectory(), file.getName() + "." + ((FileNameExtensionFilter)filter).getExtensions()[0]);</a>
+<span class="sourceLineNo">236</span><a id="line.236">                        }</a>
+<span class="sourceLineNo">237</span><a id="line.237">                        System.out.println("save current graphic to file " + file.getName() + " using format "</a>
+<span class="sourceLineNo">238</span><a id="line.238">                                        + ((FileNameExtensionFilter)filter).getExtensions()[0]);</a>
+<span class="sourceLineNo">239</span><a id="line.239">                }</a>
+<span class="sourceLineNo">240</span><a id="line.240">        }</a>
+<span class="sourceLineNo">241</span><a id="line.241"></a>
+<span class="sourceLineNo">242</span><a id="line.242">        /**</a>
+<span class="sourceLineNo">243</span><a id="line.243">         * Handles the opening of a new drawing from a file.</a>
+<span class="sourceLineNo">244</span><a id="line.244">         */</a>
+<span class="sourceLineNo">245</span><a id="line.245">        private void doOpen() {</a>
+<span class="sourceLineNo">246</span><a id="line.246">                JFileChooser chooser = new JFileChooser(getClass().getResource("")</a>
+<span class="sourceLineNo">247</span><a id="line.247">                                .getFile());</a>
+<span class="sourceLineNo">248</span><a id="line.248">                chooser.setDialogTitle("Open Graphic");</a>
+<span class="sourceLineNo">249</span><a id="line.249">                chooser.setDialogType(JFileChooser.OPEN_DIALOG);</a>
+<span class="sourceLineNo">250</span><a id="line.250">                chooser.setFileFilter(new javax.swing.filechooser.FileFilter() {</a>
+<span class="sourceLineNo">251</span><a id="line.251">                        @Override</a>
+<span class="sourceLineNo">252</span><a id="line.252">                        public String getDescription() {</a>
+<span class="sourceLineNo">253</span><a id="line.253">                                return "JDraw Graphic (*.draw)";</a>
+<span class="sourceLineNo">254</span><a id="line.254">                        }</a>
+<span class="sourceLineNo">255</span><a id="line.255"></a>
+<span class="sourceLineNo">256</span><a id="line.256">                        @Override</a>
+<span class="sourceLineNo">257</span><a id="line.257">                        public boolean accept(File f) {</a>
+<span class="sourceLineNo">258</span><a id="line.258">                                return f.isDirectory() || f.getName().endsWith(".draw");</a>
+<span class="sourceLineNo">259</span><a id="line.259">                        }</a>
+<span class="sourceLineNo">260</span><a id="line.260">                });</a>
+<span class="sourceLineNo">261</span><a id="line.261">                int res = chooser.showOpenDialog(this);</a>
+<span class="sourceLineNo">262</span><a id="line.262"></a>
+<span class="sourceLineNo">263</span><a id="line.263">                if (res == JFileChooser.APPROVE_OPTION) {</a>
+<span class="sourceLineNo">264</span><a id="line.264">                        // read jdraw graphic</a>
+<span class="sourceLineNo">265</span><a id="line.265">                        System.out.println("read file "</a>
+<span class="sourceLineNo">266</span><a id="line.266">                                        + chooser.getSelectedFile().getName());</a>
+<span class="sourceLineNo">267</span><a id="line.267">                }</a>
+<span class="sourceLineNo">268</span><a id="line.268">        }</a>
+<span class="sourceLineNo">269</span><a id="line.269"></a>
+<span class="sourceLineNo">270</span><a id="line.270">}</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</pre>
+</div>
+</main>
+</body>
+</html>
