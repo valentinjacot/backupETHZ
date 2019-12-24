@@ -1,0 +1,1 @@
+/usr/bin/c++    -std=c++11 -g -Wall -O3 -Wextra -Wno-deprecated-declarations -pedantic    CMakeFiles/gramschmidt.dir/gramschmidt.cpp.o  -o gramschmidt -rdynamic 

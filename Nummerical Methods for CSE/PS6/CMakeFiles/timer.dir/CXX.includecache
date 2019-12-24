@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/valentin/Documents/RW/CSE/PS6/timer.cpp
+chrono
+-
+iostream
+-
+timer.hpp
+/home/valentin/Documents/RW/CSE/PS6/timer.hpp
+
+/home/valentin/Documents/RW/CSE/PS6/timer.hpp
+chrono
+-
+

@@ -1,0 +1,1 @@
+/usr/bin/c++    -std=c++11 -g -Wall -Wextra -Wno-deprecated-declarations -pedantic    CMakeFiles/quadsingint.dir/quadsingint.cpp.o CMakeFiles/quadsingint.dir/gauleg.cpp.o  -o quadsingint -rdynamic 

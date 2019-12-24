@@ -1,0 +1,1 @@
+/usr/bin/c++    -std=c++11 -g -O3 -Wextra -Wno-deprecated-declarations -pedantic -I/home/valentin/Eigen    CMakeFiles/imp.dir/impedancemap.cpp.o  -o imp -rdynamic 

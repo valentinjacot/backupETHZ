@@ -1,0 +1,1 @@
+/usr/bin/c++    -std=c++11 -g -Wall -O3 -Wextra -Wno-deprecated-declarations -pedantic   CMakeFiles/banded_matrix.dir/banded_matrix.cpp.o  -o banded_matrix -rdynamic 

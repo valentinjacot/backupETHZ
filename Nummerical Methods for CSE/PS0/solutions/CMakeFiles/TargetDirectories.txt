@@ -1,0 +1,3 @@
+/home/valentin/Documents/RW/CSE/PS0/solutions/CMakeFiles/gramschmidt.dir
+/home/valentin/Documents/RW/CSE/PS0/solutions/CMakeFiles/houserefl.dir
+/home/valentin/Documents/RW/CSE/PS0/solutions/CMakeFiles/strassen.dir

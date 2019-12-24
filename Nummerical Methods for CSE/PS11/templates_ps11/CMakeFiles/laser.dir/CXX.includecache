@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/valentin/Documents/RW/CSE/PS11/templates_ps11/gauleg.hpp
+Eigen/Sparse
+-
+Eigen/Eigenvalues
+-
+cmath
+-
+
+/home/valentin/Documents/RW/CSE/PS11/templates_ps11/laserquad_template.cpp
+gauleg.hpp
+/home/valentin/Documents/RW/CSE/PS11/templates_ps11/gauleg.hpp
+iomanip
+-
+iostream
+-
+cmath
+-
+

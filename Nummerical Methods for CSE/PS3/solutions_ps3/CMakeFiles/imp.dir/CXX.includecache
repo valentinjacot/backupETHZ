@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/valentin/Documents/RW/CSE/PS3/solutions_ps3/impedancemap.cpp
+Eigen/Dense
+-
+Eigen/LU
+-
+iostream
+-
+iomanip
+-
+timer.h
+/home/valentin/Documents/RW/CSE/PS3/solutions_ps3/timer.h
+
+/home/valentin/Documents/RW/CSE/PS3/solutions_ps3/timer.h
+chrono
+-
+

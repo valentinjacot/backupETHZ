@@ -1,0 +1,2 @@
+/usr/bin/ar cr libgauleg.a  CMakeFiles/gauleg.dir/gauleg.cpp.o
+/usr/bin/ranlib libgauleg.a

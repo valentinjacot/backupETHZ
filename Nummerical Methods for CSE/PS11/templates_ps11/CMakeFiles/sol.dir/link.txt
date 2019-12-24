@@ -1,0 +1,1 @@
+/usr/bin/c++   -Wall -I/home/valentin/Eigen -std=c++0x    CMakeFiles/sol.dir/quadsingint.cpp.o  -o sol -rdynamic libgauleg.a 

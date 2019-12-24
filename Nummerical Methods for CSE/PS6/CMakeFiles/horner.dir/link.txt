@@ -1,0 +1,1 @@
+/usr/bin/c++   -std=c++0x    CMakeFiles/horner.dir/horner.cpp.o  -o horner -rdynamic libtimer.a 

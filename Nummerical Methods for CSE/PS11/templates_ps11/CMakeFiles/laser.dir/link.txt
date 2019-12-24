@@ -1,0 +1,1 @@
+/usr/bin/c++   -Wall -I/home/valentin/Eigen -std=c++0x    CMakeFiles/laser.dir/laserquad_template.cpp.o  -o laser -rdynamic libgauleg.a 

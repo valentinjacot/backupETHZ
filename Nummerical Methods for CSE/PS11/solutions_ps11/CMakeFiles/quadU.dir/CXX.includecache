@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/valentin/Documents/RW/CSE/PS11/solutions_ps11/quadU.cpp
+iostream
+-
+math.h
+-
+vector
+-
+complex
+-
+

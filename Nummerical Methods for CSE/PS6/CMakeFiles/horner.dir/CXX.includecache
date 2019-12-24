@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/valentin/Documents/RW/CSE/PS6/horner.cpp
+iostream
+-
+utility
+-
+vector
+-
+cmath
+-
+iomanip
+-
+chrono
+-
+timer.hpp
+/home/valentin/Documents/RW/CSE/PS6/timer.hpp
+
+/home/valentin/Documents/RW/CSE/PS6/timer.hpp
+chrono
+-
+

@@ -1,0 +1,1 @@
+/usr/bin/c++    -std=c++11 -g -Wall -Wextra -Wno-deprecated-declarations -pedantic    CMakeFiles/quadU.dir/quadU.cpp.o  -o quadU -rdynamic 

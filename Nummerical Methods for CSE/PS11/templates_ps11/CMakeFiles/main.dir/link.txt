@@ -1,0 +1,1 @@
+/usr/bin/c++   -Wall -I/home/valentin/Eigen -std=c++0x    CMakeFiles/main.dir/quadsingint_template.cpp.o  -o main -rdynamic libgauleg.a 

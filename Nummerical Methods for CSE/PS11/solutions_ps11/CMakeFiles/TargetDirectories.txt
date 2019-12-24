@@ -1,0 +1,4 @@
+/home/valentin/Documents/RW/CSE/PS11/solutions_ps11/CMakeFiles/laserquad.dir
+/home/valentin/Documents/RW/CSE/PS11/solutions_ps11/CMakeFiles/quadU.dir
+/home/valentin/Documents/RW/CSE/PS11/solutions_ps11/CMakeFiles/quadinf.dir
+/home/valentin/Documents/RW/CSE/PS11/solutions_ps11/CMakeFiles/quadsingint.dir
