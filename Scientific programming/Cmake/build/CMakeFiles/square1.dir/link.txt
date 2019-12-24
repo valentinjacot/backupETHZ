@@ -1,0 +1,1 @@
+/usr/bin/c++       CMakeFiles/square1.dir/main.cpp.o CMakeFiles/square1.dir/square.cpp.o  -o square1 -rdynamic 

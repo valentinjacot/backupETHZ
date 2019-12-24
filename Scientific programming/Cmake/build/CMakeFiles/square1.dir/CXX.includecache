@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/valentin/Documents/RW/Cpp/Cmake/main.cpp
+iostream
+-
+square.hpp
+/home/valentin/Documents/RW/Cpp/Cmake/square.hpp
+
+/home/valentin/Documents/RW/Cpp/Cmake/square.cpp
+square.hpp
+/home/valentin/Documents/RW/Cpp/Cmake/square.hpp
+
+/home/valentin/Documents/RW/Cpp/Cmake/square.hpp
+
