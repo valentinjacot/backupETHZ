@@ -1,0 +1,5 @@
+*.swp
+heat2d
+*.o
+*.optrpt
+.DS_Store
